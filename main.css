@@ -1794,6 +1794,7 @@ div[data-action-type='toggle-group'] {
 	padding: 20px;
 	max-width: 1280px;
 	text-align: var(--rtl-or-ltr);
+	display: none;
 }
 
 .outer {
