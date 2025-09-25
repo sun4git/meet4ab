@@ -104,6 +104,7 @@ async function main() {
 				getById("info").style.display = "none";
 				getById("info").style.opacity = 0;
 				getById("chatBody").innerHTML = "";
+				getById("credits").style.display = "none";		//sun4git
 			} catch (e) {}
 		} else if (session.label === false) {
 			document.title = location.hostname;
@@ -8639,4 +8640,5 @@ async function main() {
 		script.src = "./thirdparty/polyfill.min.js"; // dynamically load this only if its needed. Keeps loading time down.
 	}, 100);
 }
+
 
