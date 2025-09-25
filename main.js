@@ -79,10 +79,12 @@ async function main() {
 	if (location.hostname !== "vdo.ninja" && location.hostname !== "backup.vdo.ninja" && location.hostname !== "proxy.vdo.ninja" && location.hostname !== "alt.vdo.ninja" && location.hostname !== "obs.ninja") {
 		errorReport = false;
 
-		if (location.hostname === "rtc.ninja") {
+		// if (location.hostname === "rtc.ninja") { 			//sun4git
+		if (location.hostname === "meet.anythingbytes.com") {	
 			try {
 				if (session.label === false) {
-					document.title = "RTC.Ninja";
+					//document.title = "RTC.Ninja"; 			//sun4git
+					document.title = "Meet by AnythingBytes";	//sun4git
 				}
 				getById("qos").innerHTML = "";
 				getById("logoname").innerHTML = "";
@@ -8637,3 +8639,4 @@ async function main() {
 		script.src = "./thirdparty/polyfill.min.js"; // dynamically load this only if its needed. Keeps loading time down.
 	}, 100);
 }
+
