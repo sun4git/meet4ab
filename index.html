@@ -3036,6 +3036,46 @@
 				// errorlog("php-credentials script Failed");
 			// }
 			//////////////////// -------------- END OF ALTERNATIVE TURN SETUP SECTION -------
+			
+			/////////////// --------  sun4git TURN SETUP SECTION  ---------
+			// This uses custom TURN server for relay turn-credentials.php is hosted in a different server (not the TURN server) and we use use-auth-secret and static-auth-secret method, rather than a plain password
+			 
+			 try {
+				 session.ws = false; // prevents connection
+				 var phpcredentialsRequest = new XMLHttpRequest();
+				 phpcredentialsRequest.onload = function() {
+					 if (this.status === 200) {
+						 try {
+							 var res = JSON.parse(this.responseText);
+						 } catch(e){
+							 console.error(e); // not proper JSON
+							 return;
+						 }
+						 session.configuration = {};
+						 session.configuration.sdpSemantics = session.sdpSemantics;
+						 session.configuration.iceServers = [];
+						 session.configuration.iceServers = session.stunServers; // Uncomment to use the hard-coded Google STUN servers, if we don't provide our own STUN
+
+						 let phpIceServers = {"username": res[0], "credential": res[1], urls:[]};
+						 for (let i = 2; i < res.length; i++){ // Supports one or multiple TURN/STUN servers, but assumes same credientials for each.
+							 phpIceServers['urls'].push(res[i]);
+						 };
+						 session.configuration.iceServers.push(phpIceServers);
+
+						 if (session.ws===false){
+							 session.ws=null; // allows connection (clears block state)
+							 session.connect(); // connect if not already connected.
+						 }
+					 }
+					//  // system does not connect if php script does not respond.
+				 };
+				 phpcredentialsRequest.open('GET', 'https://anythingbytes.com/turn-credentials.php', true); // `false` makes the request synchronous
+				 phpcredentialsRequest.send();
+			 } catch (e) {
+				 console.error(e);
+				 errorlog("php-credentials script Failed");
+			 }
+			//////////////////// -------------- sun4git END OF TURN SETUP SECTION -------
 
 			// session.configuration.iceTransportPolicy = "relay";  // uncomment to enable "&privacy" and force the TURN server's use
 
@@ -3048,7 +3088,9 @@
 			session.wss = "wss://cubuntu.eastus.cloudapp.azure.com:992"; 	//sun4git 
 			session.customWSS = true;										//sun4git
 			session.title = "Meet by AnythingBytes" 						//sun4git //not sure if this is really changing the browser title as I didn't find any reference yet. so change doc title in main.js too
-			session.totalRoomBitrate = 4096;								//sun4git //500kbps seems too low. trying with 4mbps
+			session.totalRoomBitrate = 12288;								//sun4git //500kbps seems too low. trying with 12mbps
+			session.quality = 0;											//sun4git //upto 1080p 60fps depending on the hardware
+			session.screensharequality= -1;									//sun4git //unconstrained
 			
 			///// The following lets you set the defaults
 
