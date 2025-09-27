@@ -68,7 +68,7 @@
 		<meta property="og:image" content="https://www.anythingbytes.com/wp-content/uploads/2023/12/logo_ab.png">
 		<meta property="og:image:width" content="1200">
 		<meta property="og:image:height" content="630">
-		<meta property="og:site_name" content="VDO.Ninja">
+		<meta property="og:site_name" content="AnythingBytes">
 
 		<style id="lightbox-animations" type="text/css"></style>
 		
@@ -3091,6 +3091,9 @@
 			session.totalRoomBitrate = 12288;								//sun4git //500kbps seems too low. trying with 12mbps
 			session.quality = 0;											//sun4git //upto 1080p 60fps depending on the hardware
 			session.screensharequality= -1;									//sun4git //unconstrained
+			session.avatar = "default";										//sun4git
+			session.controlroombitrate = true;								//sun4git
+			session.maxvideobitrate = 4096;									//sun4git //trying to limit to 4mbps per stream
 			
 			///// The following lets you set the defaults
 
