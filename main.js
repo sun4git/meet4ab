@@ -2252,9 +2252,11 @@ async function main() {
 		getById("main").classList.remove("hidden");
 	}
 
-	if (urlParams.has("avatar")) {
+	if (session.avatar || urlParams.has("avatar")) {								//sun4git - added session.avatar check
 		var avatar = urlParams.get("avatar") || false;
-		if (avatar && avatar == "default") {
+		getById("avatarDiv3").classList.remove("hidden");							//sun4git - without this, it never gets loaded - the code in the else block is redundant now
+		getById("avatarDiv").classList.remove("hidden");							//sun4git - without this, it never gets loaded - the code in the else block is redundant now
+		if (session.avatar == "default" || (avatar && avatar == "default")) {		//sun4git - added session.avatar default check
 			session.avatar = document.getElementById("defaultAvatar2");
 			document.body.appendChild(session.avatar);
 			session.avatar.ready = false;
@@ -8640,5 +8642,6 @@ async function main() {
 		script.src = "./thirdparty/polyfill.min.js"; // dynamically load this only if its needed. Keeps loading time down.
 	}, 100);
 }
+
 
 
