@@ -2258,6 +2258,7 @@ async function main() {
 		getById("avatarDiv").classList.remove("hidden");							//sun4git - without this, it never gets loaded - the code in the else block is redundant now
 		if (session.avatar == "default" || (avatar && avatar == "default")) {		//sun4git - added session.avatar default check
 			session.avatar = document.getElementById("defaultAvatar2");
+			document.getElementById('defaultAvatar2').style.visibility = 'hidden';
 			document.body.appendChild(session.avatar);
 			session.avatar.ready = false;
 			session.avatar.onload = () => {
@@ -8642,6 +8643,7 @@ async function main() {
 		script.src = "./thirdparty/polyfill.min.js"; // dynamically load this only if its needed. Keeps loading time down.
 	}, 100);
 }
+
 
 
 
